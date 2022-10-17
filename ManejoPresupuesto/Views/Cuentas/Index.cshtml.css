@@ -1,0 +1,17 @@
+﻿h1 {
+    color: green;
+}
+
+.acordeon-cuentas button {
+    color: black !important;
+    font-size: 20px;
+}
+
+.acordeon-cuentas ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.acordeon-cuentas .acordeon-collapse {
+    font-size: 18px;
+}

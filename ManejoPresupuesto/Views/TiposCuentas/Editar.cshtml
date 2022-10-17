@@ -1,0 +1,29 @@
+﻿@model TipoCuenta
+@{
+    ViewData["Title"] = "Editar Tipo de Cuenta";
+}
+<h1>Aqui puedes Editar el Tipo de Cuenta: @Model.Nombre</h1>
+
+@*linea que muestra al usuario los campos requeridos*@
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@*fin linea*@
+<form asp-action="Editar">
+@*    linea trae id de tipo cuenta del usuario logueado*@
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        @*sincroniza los datos ingresados: asp-for para mantener los datos ingresados en el campo cargado*@
+        <label asp-for="Nombre" class="form-label"></label>
+        <input type="text" asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+   <button type="submit" class="btn btn-primary">Fin Edicion</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+
+</form>
+
+@section Scripts
+
+    {
+    <partial name="_ValidationScriptsPartial" />
+                  }
