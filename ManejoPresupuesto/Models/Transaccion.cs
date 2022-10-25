@@ -24,5 +24,12 @@ namespace ManejoPresupuesto.Models
         [Range(1, maximum: int.MaxValue, ErrorMessage = "Debe seleccionar una Cuenta pues")]
         [Display(Name = "Cuenta")]
         public int CuentaId { get; set; }
+
+        [Display(Name = "Tipo Operacion")]
+        public TipoOperacion TipoOperacionId { get; set; } = TipoOperacion.Ingreso;
+
+        public string Cuenta { get; set; }
+
+        public string Categoria { get; set; }
     }
 }
