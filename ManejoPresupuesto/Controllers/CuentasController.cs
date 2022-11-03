@@ -99,7 +99,7 @@ namespace ManejoPresupuesto.Controllers
             return View(modelo);
         }
 
-[HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Crear()
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -108,6 +108,7 @@ namespace ManejoPresupuesto.Controllers
             modelo.TiposCuentas = await ObtenerTiposCuentas(usuarioId);
             return View(modelo);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Crear(CuentaCreacionViewModel cuenta)
@@ -127,6 +128,8 @@ namespace ManejoPresupuesto.Controllers
             await repositorioCuentas.Crear(cuenta);
             return RedirectToAction("Index");
         }
+
+
 
         public async Task<IActionResult> Editar(int id)
         {
@@ -153,6 +156,8 @@ namespace ManejoPresupuesto.Controllers
             return View(modelo);
         }
 
+        
+        
         [HttpPost]
         public async Task<IActionResult> Editar(CuentaCreacionViewModel cuentaEditar)
         {
@@ -174,6 +179,9 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+
         [HttpGet]
         public async Task<IActionResult> Borrar(int id)
         {
@@ -186,6 +194,9 @@ namespace ManejoPresupuesto.Controllers
             }
             return View(cuenta);
         }
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> BorrarCuenta(int id)
@@ -202,6 +213,7 @@ namespace ManejoPresupuesto.Controllers
         }
 
 
+        
         private async Task<IEnumerable<SelectListItem>> ObtenerTiposCuentas(int usuarioId)
             {
                 var tiposCuentas = await repositoriosTiposCuentas.Obtener(usuarioId);

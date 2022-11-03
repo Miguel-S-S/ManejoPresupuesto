@@ -35,6 +35,7 @@ namespace ManejoPresupuesto.Servicios
         }
 
 
+
         public async Task Crear(TipoCuenta tipoCuenta)
         {
             using var connection = new SqlConnection(connectionString);
@@ -46,6 +47,8 @@ namespace ManejoPresupuesto.Servicios
                                                    
             tipoCuenta.Id = id;
         }
+
+
 
         public async Task<bool> Existe(string nombre, int usuarioId)
         {
@@ -61,6 +64,7 @@ namespace ManejoPresupuesto.Servicios
         }
 
 
+
         public async Task<IEnumerable<TipoCuenta>> Obtener(int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
@@ -70,13 +74,18 @@ namespace ManejoPresupuesto.Servicios
                                                             Order By Orden",
                                                             new {usuarioId});
         }
+
+
+
         public async Task Actualizar(TipoCuenta tipoCuenta)
         {
             using var connection = new SqlConnection(connectionString);
-            await connection.ExecuteAsync(@"update TiposCuentas
+            await connection.ExecuteAsync(@"UPDATE TiposCuentas
                                             Set Nombre = @Nombre
                                             where Id = @Id", tipoCuenta);
         }
+
+
         public async Task<TipoCuenta> ObtenerPorID(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
@@ -85,17 +94,25 @@ namespace ManejoPresupuesto.Servicios
                                                                           Where Id = @Id AND UsuarioId = @UsuarioId",
                                                                           new { id, usuarioId });
         }
+
+
+
         public async Task Borrar(int id)
         {
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync("DELETE TiposCuentas WHERE Id = @Id", new { id });
         }
+
+
+
         public async Task Ordenar(IEnumerable<TipoCuenta> tipoCuentasOrdenados)
         {
             var query = "update TiposCuentas Set Orden = @Orden Where Id = @Id;";
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(query, tipoCuentasOrdenados);
         }
+
+
 
         public Task ObtenerPorID()
         {

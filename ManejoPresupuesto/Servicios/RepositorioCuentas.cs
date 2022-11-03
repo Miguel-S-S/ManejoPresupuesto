@@ -12,14 +12,23 @@ namespace ManejoPresupuesto.Servicios
         Task Crear(Cuenta cuenta);
         Task<Cuenta> ObtenerPorId(int id, int usuarioId);
     }
+
+
+
     public class RepositorioCuentas: IRepositoriosCuentas
     {
         private readonly string connectionString;
         
+
+
         public RepositorioCuentas(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("MyConnection");
         }
+
+
+
+
         public async Task Crear(Cuenta cuenta)
         {
             using var connection = new SqlConnection(connectionString);
@@ -30,6 +39,10 @@ namespace ManejoPresupuesto.Servicios
 
                                         cuenta.Id = id;
         }
+
+
+
+
         public async Task<IEnumerable<Cuenta>> Buscar(int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
@@ -40,11 +53,14 @@ namespace ManejoPresupuesto.Servicios
                                                                                                     where tc.UsuarioId = @UsuarioId
                                                                                                     Order by tc.Orden", new { usuarioId });
         }
+
+
+
         public async Task<Cuenta> ObtenerPorId(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryFirstOrDefaultAsync<Cuenta>(
-                @"SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion, tc.Id
+                                                                                                  @"SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion, tc.Id
                                                                                                     from Cuentas
                                                                                                     inner join TiposCuentas tc
                                                                                                     on tc.Id = Cuentas.TipoCuentaId
@@ -52,6 +68,8 @@ namespace ManejoPresupuesto.Servicios
                                                                                                      Cuentas.Id = @Id", 
                                                                                                       new {id, usuarioId});
          }
+
+
 
         public async Task Actualizar(CuentaCreacionViewModel cuenta)
         {
@@ -61,6 +79,9 @@ namespace ManejoPresupuesto.Servicios
                                                                      TipoCuentaId = @TipoCuentaId
                                                                        WHERE Id = @Id", cuenta);
         }
+
+
+
         public async Task Borrar (int id )
         {
             using var connection = new SqlConnection(connectionString);

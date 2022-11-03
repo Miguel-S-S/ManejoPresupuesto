@@ -43,8 +43,10 @@
 
             @if (Model.TransaccionesAgrupadas.Count() == 0)
             {
-                <h5>No hay datos para mostrar</h5>
-            } else {
+                <h5>No hay Transacciones realizadas en este mes</h5>
+            } 
+            else 
+            {
                 <table class="table">
                     <tbody>
                         @foreach (var transaccionAgrupada in Model.TransaccionesAgrupadas)
@@ -63,19 +65,18 @@
                                 <tr style="vertical-align: middle">
                                     <td>
                                         <a asp-controller="transacciones" asp-action="Editar" 
-                                        asp-route-id="@transaccion.Id" asp-route-urlRetorno="ViewBag.urlRetorno">
+                                        asp-route-id="@transaccion.Id" asp-route-urlRetorno="@ViewBag.urlRetorno">
                                             <i class="bi-pencil"></i>
                                         </a>
                                     </td>
                                     <td>@transaccion.Categoria</td>
                                     <td>@transaccion.Cuenta</td>
-                                    <td class="activo">@(transaccion.TipoOperacionId == TipoOperacion.Ingreso
-                                        ? transaccion.Monto.ToString("N"): null)</td>
-                                    <td class="pasivo">@(transaccion.TipoOperacionId == TipoOperacion.Gasto
-                                        ? transaccion.Monto.ToString("N"): null)</td>
+                                    <td class="activo">@(transaccion.TipoOperacionId == TipoOperacion.Ingreso ? transaccion.Monto.ToString("N") : null)</td>
+                                    <td class="pasivo">@(transaccion.TipoOperacionId == TipoOperacion.Gasto ? transaccion.Monto.ToString("N") : null)</td>
                                 </tr>
                             }
                         }
-                    </tbody>                     
+                    </tbody>  
+             
                 </table>
-            }
+}

@@ -57,7 +57,7 @@ namespace ManejoPresupuesto.Servicios
         }
 
         public async Task Actualizar(Transaccion transaccion, decimal montoAnterior,
-            int cuentaAnteriorId)
+            int CuentaAnteriorId)
         {
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync("Transacciones_Actualizar",
@@ -70,7 +70,7 @@ namespace ManejoPresupuesto.Servicios
                     transaccion.CuentaId,
                     transaccion.Nota,
                     montoAnterior,
-                    cuentaAnteriorId
+                    CuentaAnteriorId
                 },
                 commandType: System.Data.CommandType.StoredProcedure);
         }

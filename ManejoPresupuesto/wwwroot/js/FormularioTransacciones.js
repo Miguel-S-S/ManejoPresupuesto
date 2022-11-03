@@ -1,4 +1,5 @@
-﻿function inicializarFormularioTransacciones(urlObtenerCategorias) {
+﻿
+function inicializarFormularioTransacciones(urlObtenerCategorias) {
     $("#TipoOperacionId").change(async function () {
         const valorSeleccionado = $(this).val();
 
@@ -9,8 +10,11 @@
                 'Content-Type': 'application/json'
             }
         });
+
         const json = await respuesta.json();
-        const opciones = json.map(categoria => `<option value =${categoria.value}>${categoria.text}</option>`);
+        const opciones =
+            json.map(categoria => `<option value=${categoria.value}>${categoria.text}</option>`);
         $("#CategoriaId").html(opciones);
+
     })
 }

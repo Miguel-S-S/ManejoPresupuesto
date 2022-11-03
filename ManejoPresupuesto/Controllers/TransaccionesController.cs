@@ -40,6 +40,31 @@ namespace ManejoPresupuesto.Controllers
             return View(modelo);
         }
 
+
+        private async Task<IEnumerable<SelectListItem>> ObtenerCuentas(int usuarioId)
+        {
+            var cuentas = await repositoriosCuentas.Buscar(usuarioId);
+            return cuentas.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
+        }
+
+
+        private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId,
+             TipoOperacion tipoOperacion)
+        {
+            var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
+            return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var categorias = await ObtenerCategorias(usuarioId, tipoOperacion);
+            return Ok(categorias);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Crear(TransaccionCreacionViewModel modelo)
         {
@@ -59,7 +84,7 @@ namespace ManejoPresupuesto.Controllers
                 return RedirectToAction("NoEncontrado", "Home");
             }
 
-            var categoria = await repositorioCategorias.ObtenerPorId(modelo.CuentaId, usuarioId);
+            var categoria = await repositorioCategorias.ObtenerPorId(modelo.CategoriaId, usuarioId);
 
             if (categoria is null)
             {
@@ -77,6 +102,8 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
 
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Editar(int id, string urlRetorno = null)
@@ -105,6 +132,8 @@ namespace ManejoPresupuesto.Controllers
 
             return View(modelo);
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> Editar(TransaccionActualizacionViewModel modelo)
@@ -149,10 +178,11 @@ namespace ManejoPresupuesto.Controllers
             else
             {
                 return LocalRedirect(modelo.UrlRetorno);
-            }  
-
-            
+            }              
         }
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> Borrar(int id)
@@ -168,27 +198,6 @@ namespace ManejoPresupuesto.Controllers
 
             await repositorioTransacciones.Borrar(id);
             return RedirectToAction("Index");
-        }
-
-        private async Task<IEnumerable<SelectListItem>> ObtenerCuentas(int usuarioId)
-        {
-            var cuentas = await repositoriosCuentas.Buscar(usuarioId);
-            return cuentas.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
-        }
-
-        private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId, TipoOperacion tipoOperacion)
-        {
-            var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
-            return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
-        {
-            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-            var categorias = await ObtenerCategorias(usuarioId, tipoOperacion);
-            return Ok(categorias);
         }
     }
 }

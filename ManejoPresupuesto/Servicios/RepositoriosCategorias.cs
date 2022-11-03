@@ -27,8 +27,8 @@ namespace ManejoPresupuesto.Servicios
         {
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>(@"INSERT INTO Categorias (Nombre, TipoOperacionId, UsuarioId)
-                                                                                                                Values(@Nombre, @TipoOperacionId, @UsuarioId);
-                                                                                                              SELECT SCOPE_IDENTITY();", categoria);
+                                                              Values(@Nombre, @TipoOperacionId, @UsuarioId);
+                                                              SELECT SCOPE_IDENTITY();", categoria);
             categoria.Id = id;
         }
         public async Task<IEnumerable<Categoria>> Obtener(int usuarioId)
@@ -38,12 +38,17 @@ namespace ManejoPresupuesto.Servicios
                 "SELECT * FROM Categorias WHERE UsuarioId = @UsuarioId", new { usuarioId });
         }
 
+
         public async Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId)
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<Categoria>(
-                "SELECT * FROM Categorias " +
-                "WHERE UsuarioId = @UsuarioId AND TipoOperacionId = @TipoOperacionId", new { usuarioId, tipoOperacionId });
+                @"SELECT * 
+                    FROM Categorias 
+                    WHERE   
+                    UsuarioId = @UsuarioId 
+                    AND 
+                    TipoOperacionId = @tipoOperacionId", new { usuarioId, tipoOperacionId });
         }
 
 
