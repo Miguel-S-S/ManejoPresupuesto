@@ -36,6 +36,6 @@ namespace ManejoPresupuesto.Models
 
         public string Cuenta { get; set; }
 
-        public string Categoria { get; set; }
+        public string Categoria { get; set; } 
     }
 }

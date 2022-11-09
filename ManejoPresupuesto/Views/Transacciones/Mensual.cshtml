@@ -1,0 +1,30 @@
+﻿@model ReporteMensualViewModel
+
+@{
+    ViewData["Title"] = "Reporte Mensual";
+
+    int añoAnterior = Model.Año - 1;
+
+    int añoPosterior = Model.Año + 1;
+
+    var resumenMontos = new ResumenMontosViewModel()
+            {
+                Gastos = Model.Gastos,
+                Ingresos = Model.Ingresos,
+                Total = Model.Total
+            };
+}
+
+<partial name="_Submenu" Model="SubMenuTransacciones.Mensual" />
+
+<h4>
+    Mostrando transacciones de 
+    <a asp-route-año="@añoAnterior" class="btn btn-secondary">
+        <i class="bi-chevron-left"></i>
+    </a>@Model.Año
+    <a asp-route-año="@añoPosterior" class="btn btn-secondary">
+        <i class="bi-chevron-right"></i>
+        </a>
+</h4>
+
+<partial name="_ResumenMontos" />

@@ -63,7 +63,7 @@ namespace ManejoPresupuesto.Controllers
 		public async Task<ActionResult> Editar(int id)
 		{
 			var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-			var tipoCuenta = await repositoriosTiposCuentas.ObtenerPorID(id, usuarioId);
+			var tipoCuenta = await repositoriosTiposCuentas.obetnerPorId(id, usuarioId);
 
 			if (tipoCuenta is null)
 			{
@@ -76,7 +76,7 @@ namespace ManejoPresupuesto.Controllers
 		public async Task<ActionResult> Editar(TipoCuenta tipoCuenta)
 		{
 			var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-			var tipoCuentaExiste = await repositoriosTiposCuentas.ObtenerPorID(tipoCuenta.Id, usuarioId);
+			var tipoCuentaExiste = await repositoriosTiposCuentas.obetnerPorId(tipoCuenta.Id, usuarioId);
 
 			if (tipoCuentaExiste is null)
 			{
@@ -90,7 +90,7 @@ namespace ManejoPresupuesto.Controllers
 		public async Task<IActionResult> Borrar(int id)
 		{
 			var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-			var tipoCuenta = await repositoriosTiposCuentas.ObtenerPorID(id, usuarioId);
+			var tipoCuenta = await repositoriosTiposCuentas.obetnerPorId(id, usuarioId);
 
 			if (tipoCuenta is null)
 			{
@@ -103,7 +103,7 @@ namespace ManejoPresupuesto.Controllers
 		public async Task<IActionResult> BorrarTipoCuenta(int id)
 		{
 			var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-			var tipoCuenta = await repositoriosTiposCuentas.ObtenerPorID(id, usuarioId);
+			var tipoCuenta = await repositoriosTiposCuentas.obetnerPorId(id, usuarioId);
 
 			if (tipoCuenta is null)
 			{

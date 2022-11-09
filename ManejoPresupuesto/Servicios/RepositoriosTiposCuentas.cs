@@ -16,7 +16,7 @@ namespace ManejoPresupuesto.Servicios
 
         Task<IEnumerable<TipoCuenta>> Obtener(int usuarioId);
 
-        Task<TipoCuenta> ObtenerPorID(int id, int usuarioId);
+        Task<TipoCuenta> obetnerPorId(int id, int usuarioId);
 
         Task ObtenerPorID();
 
@@ -86,7 +86,7 @@ namespace ManejoPresupuesto.Servicios
         }
 
 
-        public async Task<TipoCuenta> ObtenerPorID(int id, int usuarioId)
+        public async Task<TipoCuenta> obetnerPorId(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"Select Id, Nombre, Orden
