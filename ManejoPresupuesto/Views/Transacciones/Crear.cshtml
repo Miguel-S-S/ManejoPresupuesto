@@ -26,7 +26,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="CategoriaId" class="form-label"></label>
-        <select asp-for="CategoriaId" class="form-select"></select>
+        <select asp-for="CategoriaId" asp-items="Model.Categorias" class="form-select"></select>
         <span asp-validation-for="CategoriaId" class="text-danger"></span>
     </div>
     <div class="mb-3">
