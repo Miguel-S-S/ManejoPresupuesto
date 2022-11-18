@@ -9,7 +9,7 @@ namespace ManejoPresupuesto.Servicios
         Task Actualizar(TipoCuenta tipoCuenta);
 
         Task Borrar(int id);
-                
+
         Task Crear(TipoCuenta tipoCuenta);
 
         Task<bool> Existe(string nombre, int usuarioId);
@@ -41,10 +41,13 @@ namespace ManejoPresupuesto.Servicios
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>
                                                    ("TiposCuentas_Insertar",
-                                                   new { usuarioId = tipoCuenta.UsuarioId,
-                                                       nombre = tipoCuenta.Nombre },
+                                                   new
+                                                   {
+                                                       usuarioId = tipoCuenta.UsuarioId,
+                                                       nombre = tipoCuenta.Nombre
+                                                   },
                                                    commandType: System.Data.CommandType.StoredProcedure);
-                                                   
+
             tipoCuenta.Id = id;
         }
 
@@ -53,12 +56,12 @@ namespace ManejoPresupuesto.Servicios
         public async Task<bool> Existe(string nombre, int usuarioId)
         {
 
-        
+
             using var connection = new SqlConnection(connectionString);
             var existe = await connection.QueryFirstOrDefaultAsync<int>(@"Select 1
                                                                         from TiposCuentas
                                                                         where Nombre = @Nombre and UsuarioId = @UsuarioId",
-                                                                        new {nombre, usuarioId});
+                                                                        new { nombre, usuarioId });
             return existe == 1;
 
         }
@@ -72,7 +75,7 @@ namespace ManejoPresupuesto.Servicios
                                                             From TiposCuentas
                                                             Where UsuarioId = @UsuarioId
                                                             Order By Orden",
-                                                            new {usuarioId});
+                                                            new { usuarioId });
         }
 
 

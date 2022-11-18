@@ -1,16 +1,14 @@
-﻿using Dapper;
-using Microsoft.Data.SqlClient;
-using ManejoPresupuesto.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Servicios;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ManejoPresupuesto.Controllers
 {
-	public class TiposCuentasController: Controller
+	public class TiposCuentasController : Controller
 	{
 		private readonly IRepositoriosTiposCuentas repositoriosTiposCuentas;
 		private readonly IServicioUsuarios servicioUsuarios;
-	
+
 		public TiposCuentasController(IRepositoriosTiposCuentas repositoriosTiposCuentas, IServicioUsuarios servicioUsuarios)
 		{
 			this.repositoriosTiposCuentas = repositoriosTiposCuentas;
@@ -24,7 +22,7 @@ namespace ManejoPresupuesto.Controllers
 			return View(tiposCuentas);
 		}
 
-		
+
 		public IActionResult Crear()
 		{
 
@@ -37,9 +35,9 @@ namespace ManejoPresupuesto.Controllers
 		{
 			//ejecuta la accion del campo que tiene [required] del constructor TipoCuenta //
 			//si el modelo no es valido -> ! es la negacion // 
-			if (!ModelState.IsValid) 
+			if (!ModelState.IsValid)
 			{
-				return View(tipoCuenta); 
+				return View(tipoCuenta);
 			}
 			tipoCuenta.UsuarioId = servicioUsuarios.ObtenerUsuarioId();
 
@@ -143,8 +141,8 @@ namespace ManejoPresupuesto.Controllers
 				return Forbid();
 			}
 
-			var tiposCuentasOrdenados = ids.Select((valor, indice) => 
-				new TipoCuenta() { Id = valor, Orden = indice +1 }).AsEnumerable();
+			var tiposCuentasOrdenados = ids.Select((valor, indice) =>
+				new TipoCuenta() { Id = valor, Orden = indice + 1 }).AsEnumerable();
 
 			await repositoriosTiposCuentas.Ordenar(tiposCuentasOrdenados);
 

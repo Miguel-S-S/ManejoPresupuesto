@@ -8,7 +8,7 @@
 
         public decimal Total => Ingresos - Gastos;
 
-        public DateTime FechaReferencia  { get; set; }   
+        public DateTime FechaReferencia { get; set; }
 
         public IEnumerable<ResultadoObtenerPorSemana> TransaccionesPorSemana { get; set; }
 

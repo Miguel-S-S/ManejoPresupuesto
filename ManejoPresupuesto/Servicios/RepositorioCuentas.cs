@@ -15,10 +15,10 @@ namespace ManejoPresupuesto.Servicios
 
 
 
-    public class RepositorioCuentas: IRepositoriosCuentas
+    public class RepositorioCuentas : IRepositoriosCuentas
     {
         private readonly string connectionString;
-        
+
 
 
         public RepositorioCuentas(IConfiguration configuration)
@@ -37,7 +37,7 @@ namespace ManejoPresupuesto.Servicios
                                                                                                 VALUES (@Nombre, @TipoCuentaId, @Descripcion, @Balance);
                                                                                                 SELECT SCOPE_IDENTITY();", cuenta);
 
-                                        cuenta.Id = id;
+            cuenta.Id = id;
         }
 
 
@@ -65,9 +65,9 @@ namespace ManejoPresupuesto.Servicios
                                                                                                     inner join TiposCuentas tc
                                                                                                     on tc.Id = Cuentas.TipoCuentaId
                                                                                                    where tc.UsuarioId = @UsuarioId AND
-                                                                                                     Cuentas.Id = @Id", 
-                                                                                                      new {id, usuarioId});
-         }
+                                                                                                     Cuentas.Id = @Id",
+                                                                                                      new { id, usuarioId });
+        }
 
 
 
@@ -82,10 +82,10 @@ namespace ManejoPresupuesto.Servicios
 
 
 
-        public async Task Borrar (int id )
+        public async Task Borrar(int id)
         {
             using var connection = new SqlConnection(connectionString);
-            await connection.ExecuteAsync("DELETE Cuentas WHERE Id = @Id", new {id});
+            await connection.ExecuteAsync("DELETE Cuentas WHERE Id = @Id", new { id });
         }
     }
 }

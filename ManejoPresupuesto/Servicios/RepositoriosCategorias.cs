@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using ManejoPresupuesto.Models;
 using Microsoft.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace ManejoPresupuesto.Servicios
 {
@@ -14,7 +13,7 @@ namespace ManejoPresupuesto.Servicios
         Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId);
         Task<Categoria> ObtenerPorId(int id, int usuarioId);
     }
-    public class RepositoriosCategorias: IRepositorioCategorias
+    public class RepositoriosCategorias : IRepositorioCategorias
     {
         private readonly string connectionString;
 
@@ -75,5 +74,5 @@ namespace ManejoPresupuesto.Servicios
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(@"DELETE Categorias WHERE Id = @Id", new { id });
         }
-    }    
+    }
 }

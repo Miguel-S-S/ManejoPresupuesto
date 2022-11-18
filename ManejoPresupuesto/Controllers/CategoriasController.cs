@@ -56,7 +56,7 @@ namespace ManejoPresupuesto.Controllers
         [HttpPost]
         public async Task<IActionResult> Editar(Categoria categoriaEditar)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(categoriaEditar);
             }
@@ -71,7 +71,7 @@ namespace ManejoPresupuesto.Controllers
             await repositorioCategorias.Actualizar(categoriaEditar);
             return RedirectToAction("Index");
         }
-   
+
 
         public async Task<IActionResult> Borrar(int id)
         {

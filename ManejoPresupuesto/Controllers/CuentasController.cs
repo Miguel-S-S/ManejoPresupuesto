@@ -37,9 +37,9 @@ namespace ManejoPresupuesto.Controllers
                 .GroupBy(x => x.TipoCuenta)
                 .Select(grupo => new IndiceCuentasViewModel
                 {
-                TipoCuenta = grupo.Key,
+                    TipoCuenta = grupo.Key,
                     Cuentas = grupo.AsEnumerable()
-            }).ToList();
+                }).ToList();
             return View(modelo);
         }
 
@@ -110,7 +110,7 @@ namespace ManejoPresupuesto.Controllers
             }
             var modelo = mapper.Map<CuentaCreacionViewModel>(cuenta);
 
-                //Single automapper
+            //Single automapper
             //    new CuentaCreacionViewModel()
             //{
             //    Id = cuenta.Id,
@@ -124,8 +124,8 @@ namespace ManejoPresupuesto.Controllers
             return View(modelo);
         }
 
-        
-        
+
+
         [HttpPost]
         public async Task<IActionResult> Editar(CuentaCreacionViewModel cuentaEditar)
         {
@@ -181,7 +181,7 @@ namespace ManejoPresupuesto.Controllers
         }
 
 
-        
+
 
 
     }

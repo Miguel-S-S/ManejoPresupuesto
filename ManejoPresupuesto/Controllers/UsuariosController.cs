@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManejoPresupuesto.Controllers
 {
-    public class UsuariosController: Controller
+    public class UsuariosController : Controller
     {
         private readonly UserManager<Usuario> userManager;
         private readonly SignInManager<Usuario> signInManager;
@@ -39,7 +39,7 @@ namespace ManejoPresupuesto.Controllers
 
             if (resultado.Succeeded)
             {
-                await signInManager.SignInAsync(usuario, isPersistent: true); 
+                await signInManager.SignInAsync(usuario, isPersistent: true);
                 return RedirectToAction("Index", "Transacciones");
             }
             else
@@ -49,7 +49,7 @@ namespace ManejoPresupuesto.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
 
-                 return View(modelo);
+                return View(modelo);
 
             }
 
@@ -63,7 +63,7 @@ namespace ManejoPresupuesto.Controllers
             return View();
         }
 
-                    
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel modelo)

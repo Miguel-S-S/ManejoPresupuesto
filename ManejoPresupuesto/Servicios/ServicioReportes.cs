@@ -10,7 +10,7 @@ namespace ManejoPresupuesto.Servicios
         Task<ReporteTransaccionesDetalladas> ObtenerReporteTransaccionesDetalladasPorCuenta(int usuarioId, int cuentaId, int mes, int año, dynamic ViewBag);
     }
 
-    public class ServicioReportes: IServicioReportes
+    public class ServicioReportes : IServicioReportes
     {
         private readonly IRepositorioTransacciones repositorioTransacciones;
         private readonly HttpContext httpContext;
@@ -69,7 +69,7 @@ namespace ManejoPresupuesto.Servicios
 
 
 
-        public async Task<ReporteTransaccionesDetalladas> 
+        public async Task<ReporteTransaccionesDetalladas>
             ObtenerReporteTransaccionesDetalladasPorCuenta(int usuarioId, int cuentaId, int mes, int año, dynamic ViewBag)
         {
             (DateTime fechaInicio, DateTime fechaFin) = GenerarFechaInicioYFin(mes, año);
@@ -118,7 +118,7 @@ namespace ManejoPresupuesto.Servicios
             return modelo;
         }
 
-        private (DateTime fechaInicio, DateTime fechaFin) GenerarFechaInicioYFin (int mes, int año)
+        private (DateTime fechaInicio, DateTime fechaFin) GenerarFechaInicioYFin(int mes, int año)
         {
             DateTime fechaInicio;
             DateTime fechaFin;

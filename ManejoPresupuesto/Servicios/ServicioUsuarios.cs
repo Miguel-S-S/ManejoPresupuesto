@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 namespace ManejoPresupuesto.Servicios
 {
@@ -22,9 +21,9 @@ namespace ManejoPresupuesto.Servicios
         {
             if (httpContext.User.Identity.IsAuthenticated)
             {
-              var idClaim = httpContext.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
+                var idClaim = httpContext.User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
 
-              var id = int.Parse(idClaim.Value);
+                var id = int.Parse(idClaim.Value);
                 return id;
             }
             else

@@ -25,8 +25,21 @@ namespace ManejoPresupuesto.Servicios
 
         public void Dispose()
         {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool v)
+        {
             throw new NotImplementedException();
         }
+
+        //public void Dispose()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task<Usuario> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
@@ -65,7 +78,7 @@ namespace ManejoPresupuesto.Servicios
 
         public Task<string> GetPasswordHashAsync(Usuario user, CancellationToken cancellationToken)
         {
-            
+
             return Task.FromResult(user.PasswordHash);
         }
 

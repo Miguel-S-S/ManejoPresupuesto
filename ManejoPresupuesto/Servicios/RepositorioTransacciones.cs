@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using ManejoPresupuesto.Models;
 using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
 
 namespace ManejoPresupuesto.Servicios
 {
@@ -17,7 +16,7 @@ namespace ManejoPresupuesto.Servicios
         Task<IEnumerable<Transaccion>> ObtenerPorUsuarioId(ParametroObtenerTransaccionesPorUsuario modelo);
     }
 
-    public class RepositorioTransacciones: IRepositorioTransacciones
+    public class RepositorioTransacciones : IRepositorioTransacciones
     {
         private readonly string connectionString;
 

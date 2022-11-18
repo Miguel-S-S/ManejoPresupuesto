@@ -1,22 +1,16 @@
 ﻿using AutoMapper;
 using ClosedXML.Excel;
-using ClosedXML.Excel.Exceptions;
-using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Servicios;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
-using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using DataTable = System.Data.DataTable;
 
 namespace ManejoPresupuesto.Controllers
 {
-    
-    public class TransaccionesController: Controller
+
+    public class TransaccionesController : Controller
     {
         private readonly IServicioUsuarios servicioUsuarios;
         private readonly IRepositoriosCuentas repositoriosCuentas;
@@ -38,14 +32,14 @@ namespace ManejoPresupuesto.Controllers
         }
 
 
-       
+
         public async Task<IActionResult> Index(int mes, int año)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
 
             var modelo = await servicioReportes.ObtenerReporteTransaccionesDetalladas(usuarioId, mes, año, ViewBag);
 
-            return View(modelo);      
+            return View(modelo);
         }
 
 
@@ -64,7 +58,7 @@ namespace ManejoPresupuesto.Controllers
                 Gastos = x.Where(x => x.TipoOperacionId == TipoOperacion.Gasto).Select(x => x.Monto).FirstOrDefault()
             }).ToList();
 
-            if(año == 0 || mes == 0)
+            if (año == 0 || mes == 0)
             {
                 var hoy = DateTime.Today;
                 año = hoy.Year;
@@ -88,7 +82,7 @@ namespace ManejoPresupuesto.Controllers
                 {
                     agrupado.Add(new ResultadoObtenerPorSemana()
                     {
-                        Semana = semana, 
+                        Semana = semana,
                         FechaInicio = fechaInicio,
                         FechaFin = fechaFin
                     });
@@ -134,7 +128,7 @@ namespace ManejoPresupuesto.Controllers
                     .Select(x => x.Monto).FirstOrDefault()
             }).ToList();
 
-            for (int mes = 1; mes <=12; mes++)
+            for (int mes = 1; mes <= 12; mes++)
             {
                 var transaccion = transaccionesAgrupadas.FirstOrDefault(x => x.Mes == mes);
 
@@ -181,9 +175,9 @@ namespace ManejoPresupuesto.Controllers
 
             var transacciones = await repositorioTransacciones.ObtenerPorUsuarioId(new ParametroObtenerTransaccionesPorUsuario
             {
-               UsuarioId = usuarioId,
-               FechaInicio = fechaInicio,
-               FechaFin = fechaFin
+                UsuarioId = usuarioId,
+                FechaInicio = fechaInicio,
+                FechaFin = fechaFin
             });
 
             var nombreArchivo = $"Manejo Presupuesto - {fechaInicio.ToString("MMM yyyy")}.xlxs";
@@ -203,7 +197,7 @@ namespace ManejoPresupuesto.Controllers
                 new ParametroObtenerTransaccionesPorUsuario
                 {
                     UsuarioId = usuarioId,
-                    FechaInicio=fechaInicio,
+                    FechaInicio = fechaInicio,
                     FechaFin = fechaFin
                 });
 
@@ -262,7 +256,7 @@ namespace ManejoPresupuesto.Controllers
                     transaccion.TipoOperacionId);
             }
 
-            using (XLWorkbook wb = new XLWorkbook() )
+            using (XLWorkbook wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(dataTable);
 
@@ -289,13 +283,13 @@ namespace ManejoPresupuesto.Controllers
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
 
-           var transacciones = await repositorioTransacciones.ObtenerPorUsuarioId(
-           new ParametroObtenerTransaccionesPorUsuario
-           {
-               UsuarioId = usuarioId,
-               FechaInicio = start,
-               FechaFin = end
-           });
+            var transacciones = await repositorioTransacciones.ObtenerPorUsuarioId(
+            new ParametroObtenerTransaccionesPorUsuario
+            {
+                UsuarioId = usuarioId,
+                FechaInicio = start,
+                FechaFin = end
+            });
 
             var eventosCalendario = transacciones.Select(transaccion => new EventoCalendario()
             {
@@ -461,7 +455,7 @@ namespace ManejoPresupuesto.Controllers
             }
 
             var transaccion = mapper.Map<Transaccion>(modelo);
-            
+
             if (modelo.TipoOperacionId == TipoOperacion.Gasto)
             {
                 transaccion.Monto *= -1;
@@ -477,7 +471,7 @@ namespace ManejoPresupuesto.Controllers
             else
             {
                 return LocalRedirect(modelo.UrlRetorno);
-            }              
+            }
         }
 
 
@@ -506,6 +500,6 @@ namespace ManejoPresupuesto.Controllers
                 return LocalRedirect(urlRetorno);
             }
 
-         }
+        }
     }
 }

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ManejoPresupuesto.Models
 {
-    public class Transaccion 
+    public class Transaccion
     {
         public int Id { get; set; }
 
@@ -13,7 +12,7 @@ namespace ManejoPresupuesto.Models
         [DataType(DataType.Date)]
 
         public DateTime FechaTransaccion { get; set; } = DateTime.Today;
-            /*Parse(DateTime.Now.ToString("yyyy-MM-dd hh:MM tt"))*/
+        /*Parse(DateTime.Now.ToString("yyyy-MM-dd hh:MM tt"))*/
 
         public decimal Monto { get; set; }
 
@@ -28,7 +27,7 @@ namespace ManejoPresupuesto.Models
 
         [Range(1, maximum: int.MaxValue, ErrorMessage = "Tiene que seleccionar una Cuenta pues")]
         [Display(Name = "Cuenta")]
-          
+
         public int CuentaId { get; set; }
 
         [Display(Name = "Tipo Operacion")]
@@ -36,6 +35,6 @@ namespace ManejoPresupuesto.Models
 
         public string Cuenta { get; set; }
 
-        public string Categoria { get; set; } 
+        public string Categoria { get; set; }
     }
 }
