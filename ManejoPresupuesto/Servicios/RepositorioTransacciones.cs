@@ -47,8 +47,9 @@ namespace ManejoPresupuesto.Servicios
             ObtenerTransaccionesPorCuenta modelo)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Transaccion>(@"SELECT t.Id, t.Monto, t.FechaTransaccion, c.Nombre as Categoria, 
-                                                            cu.Nombre as Cuenta, c.TipoOperacionId,
+            return await connection.QueryAsync<Transaccion>(@"
+                                                            SELECT t.Id, t.Monto, t.FechaTransaccion, c.Nombre as Categoria, 
+                                                            cu.Nombre as Cuenta, c.TipoOperacionId
                                                             FROM Transacciones t
                                                             inner JOIN Categorias c
                                                             ON c.Id = t.CategoriaId
@@ -65,7 +66,8 @@ namespace ManejoPresupuesto.Servicios
             ParametroObtenerTransaccionesPorUsuario modelo)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Transaccion>(@"SELECT t.Id, t.Monto, t.FechaTransaccion, c.Nombre as Categoria,
+            return await connection.QueryAsync<Transaccion>(@"
+                                                            SELECT t.Id, t.Monto, t.FechaTransaccion, c.Nombre as Categoria,
                                                             cu.Nombre as Cuenta, c.TipoOperacionId, Nota
                                                             FROM Transacciones t
                                                             INNER JOIN Categorias c
@@ -102,7 +104,8 @@ namespace ManejoPresupuesto.Servicios
         public async Task<Transaccion> ObtenerPorId(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<Transaccion>(@"SELECT Transacciones.*, cat.TipoOperacionId
+            return await connection.QueryFirstOrDefaultAsync<Transaccion>(@"
+                                        SELECT Transacciones.*, cat.TipoOperacionId
                                         FROM Transacciones
                                         INNER JOIN Categorias cat
                                         ON cat.Id = Transacciones.CategoriaId

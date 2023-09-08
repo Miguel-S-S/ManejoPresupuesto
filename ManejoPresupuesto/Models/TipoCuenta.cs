@@ -13,7 +13,8 @@ namespace ManejoPresupuesto.Models
         //a continuacion validaciones por atributo
         //[StringLength(maximumLength:50, MinimumLength = 3, ErrorMessage = "Tu {0} necesita al menos {2} y como maximo {1} ¡GATITO!")]
         //[Display(Name = "Nombre del tipo cuenta: ")]
-        [Remote(action: "VerificarExisteTipoCuenta", controller: "TiposCuentas")]
+        [Remote(action: "VerificarExisteTipoCuenta", controller: "TiposCuentas",
+            AdditionalFields = nameof(Id))]
 
         [PrimeraLetraMayuscula]
         public String Nombre { get; set; }
